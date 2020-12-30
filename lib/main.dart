@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/maath/Documents/Develop/Flutter/podekex_flutter/lib/pages/home_page/home_page.dart';
+import 'package:podekex_flutter/pages/home_page/home_page.dart';
 
 void main() {
   runApp(MyApp());
