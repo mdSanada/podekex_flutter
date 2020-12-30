@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:podekex_flutter/consts/consts_api.dart';
 import 'package:podekex_flutter/consts/consts_app.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
-class PokeItem extends StatelessWidget {
+class PokeItem extends StatefulWidget {
   final String name;
   final int index;
   final Color color;
@@ -16,9 +15,16 @@ class PokeItem extends StatelessWidget {
       {Key key, this.name, this.index, this.color, this.num, this.types})
       : super(key: key);
 
+  @override
+  _PokeItemState createState() => _PokeItemState();
+}
+
+class _PokeItemState extends State<PokeItem> {
+  PokeApiStore _pokemonStore;
+
   Widget setTipos() {
     List<Widget> lista = [];
-    types.forEach((nome) {
+    widget.types.forEach((nome) {
       lista.add(
         Column(
           children: <Widget>[
@@ -53,8 +59,13 @@ class PokeItem extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _pokemonStore = GetIt.instance<PokeApiStore>();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _pokemonStore = Provider.of<PokeApiStore>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -68,7 +79,7 @@ class PokeItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      widget.name,
                       style: TextStyle(
                         fontFamily: 'Google',
                         fontSize: 18,
@@ -95,7 +106,7 @@ class PokeItem extends StatelessWidget {
                     opacity: 0.2,
                   ),
                   Align(
-                    child: _pokemonStore.getImageWithSize(numero: num, size: 80),
+                    child: _pokemonStore.getImageWithSize(numero: widget.num, size: 80),
                     alignment: Alignment.bottomRight,
                   )
                 ],
@@ -104,7 +115,7 @@ class PokeItem extends StatelessWidget {
           ),
         ),
         decoration: BoxDecoration(
-          color: ConstsAPI.getColorType(type: types.first),
+          color: ConstsAPI.getColorType(type: widget.types.first),
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),

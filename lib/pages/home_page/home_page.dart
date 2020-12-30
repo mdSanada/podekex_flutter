@@ -7,12 +7,24 @@ import 'package:podekex_flutter/pages/poke_detail/poke_datail_page.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  PokeApiStore _pokemonStore;
+
+  @override
+  void initState() {
+    super.initState();
+    _pokemonStore = GetIt.instance<PokeApiStore>();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _pokemonStore = Provider.of<PokeApiStore>(context);
     if (_pokemonStore.pokeAPI == null) {
       _pokemonStore.fetchPokemonList();
     }
