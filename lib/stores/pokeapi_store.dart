@@ -20,6 +20,9 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   Color pokemonColor;
 
+  @observable
+  int currentPosition;
+
   @computed
   PokeAPI get pokeAPI => _pokeAPI;
 
@@ -42,6 +45,7 @@ abstract class _PokeApiStoreBase with Store {
   setCurrentPokemon({int index}) {
     _currentPokemon = _pokeAPI.pokemon[index];
     pokemonColor = ConstsAPI.getColorType(type: _currentPokemon.type.first);
+    currentPosition = index;
   }
 
   @action
@@ -63,6 +67,20 @@ abstract class _PokeApiStoreBase with Store {
       placeholder: (context, url) => new Container(
         color: Colors.transparent,
       ),
+      imageUrl:
+      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$numero.png',
+    );
+  }
+
+  @action
+  Widget getImageWithSizeAnimation({String numero, double size, int index, int current}) {
+    return CachedNetworkImage(
+      height: size,
+      width: size,
+      placeholder: (context, url) => new Container(
+        color: Colors.transparent,
+      ),
+      color: index == current ? null : Colors.black.withOpacity(0.5),
       imageUrl:
       'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$numero.png',
     );

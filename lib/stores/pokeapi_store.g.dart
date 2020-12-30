@@ -69,6 +69,21 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     });
   }
 
+  final _$currentPositionAtom = Atom(name: '_PokeApiStoreBase.currentPosition');
+
+  @override
+  int get currentPosition {
+    _$currentPositionAtom.reportRead();
+    return super.currentPosition;
+  }
+
+  @override
+  set currentPosition(int value) {
+    _$currentPositionAtom.reportWrite(value, super.currentPosition, () {
+      super.currentPosition = value;
+    });
+  }
+
   final _$_PokeApiStoreBaseActionController =
       ActionController(name: '_PokeApiStoreBase');
 
@@ -117,9 +132,23 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
+  Widget getImageWithSizeAnimation(
+      {String numero, double size, int index, int current}) {
+    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction(
+        name: '_PokeApiStoreBase.getImageWithSizeAnimation');
+    try {
+      return super.getImageWithSizeAnimation(
+          numero: numero, size: size, index: index, current: current);
+    } finally {
+      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 pokemonColor: ${pokemonColor},
+currentPosition: ${currentPosition},
 pokeAPI: ${pokeAPI},
 currentPokemon: ${currentPokemon}
     ''';

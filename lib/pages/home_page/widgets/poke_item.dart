@@ -73,6 +73,10 @@ class _PokeItemState extends State<PokeItem> {
           padding: const EdgeInsets.all(4.0),
           child: Stack(
             children: <Widget>[
+              Align(
+                child: Hero(tag: widget.name,child: _pokemonStore.getImageWithSize(numero: widget.num, size: 80)),
+                alignment: Alignment.bottomRight,
+              ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
@@ -94,22 +98,24 @@ class _PokeItemState extends State<PokeItem> {
                   ],
                 ),
               ),
-              Stack(
+              Align(
                 alignment: Alignment.bottomRight,
-                children: <Widget>[
-                  Opacity(
-                    child: Image.asset(
-                      ConstsApp.whitePokeball,
-                      height: 80,
-                      width: 80,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: <Widget>[
+                    Hero(
+                      tag: widget.name + 'rotation',
+                      child: Opacity(
+                        child: Image.asset(
+                          ConstsApp.whitePokeball,
+                          height: 80,
+                          width: 80,
+                        ),
+                        opacity: 0.2,
+                      ),
                     ),
-                    opacity: 0.2,
-                  ),
-                  Align(
-                    child: _pokemonStore.getImageWithSize(numero: widget.num, size: 80),
-                    alignment: Alignment.bottomRight,
-                  )
-                ],
+                  ],
+                ),
               ),
             ],
           ),
