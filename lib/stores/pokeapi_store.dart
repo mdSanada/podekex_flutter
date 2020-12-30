@@ -31,8 +31,31 @@ abstract class _PokeApiStoreBase with Store {
   }
 
   @action
+  setCurrentPokemon({int index}) {
+    return _pokeAPI.pokemon[index];
+  }
+
+  @action
+  getCurrentPokemon({int index}) {
+    return _pokeAPI.pokemon[index];
+  }
+
+  @action
   Widget getImage({String numero}) {
     return CachedNetworkImage(
+      placeholder: (context, url) => new Container(
+        color: Colors.transparent,
+      ),
+      imageUrl:
+      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$numero.png',
+    );
+  }
+
+  @action
+  Widget getImageWithSize({String numero, double size}) {
+    return CachedNetworkImage(
+      height: size,
+      width: size,
       placeholder: (context, url) => new Container(
         color: Colors.transparent,
       ),

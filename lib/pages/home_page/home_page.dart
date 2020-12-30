@@ -13,7 +13,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _pokemonStore = Provider.of<PokeApiStore>(context);
-    _pokemonStore.fetchPokemonList();
+    if (_pokemonStore.pokeAPI == null) {
+      _pokemonStore.fetchPokemonList();
+    }
 
     double screenWidth = MediaQuery
         .of(context)
@@ -86,7 +88,6 @@ class HomePage extends StatelessWidget {
                                                 (BuildContext context) =>
                                                 PokeDetailPage(
                                                   index: index,
-                                                  name: pokemon.name,
                                                 ),
                                             fullscreenDialog: true,
                                           ));

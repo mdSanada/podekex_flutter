@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:podekex_flutter/consts/consts_api.dart';
 import 'package:podekex_flutter/consts/consts_app.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:podekex_flutter/stores/pokeapi_store.dart';
+import 'package:provider/provider.dart';
 
 class PokeItem extends StatelessWidget {
   final String name;
@@ -52,6 +54,7 @@ class PokeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _pokemonStore = Provider.of<PokeApiStore>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -92,15 +95,7 @@ class PokeItem extends StatelessWidget {
                     opacity: 0.2,
                   ),
                   Align(
-                    child: CachedNetworkImage(
-                      height: 80,
-                      width: 80,
-                      placeholder: (context, url) => new Container(
-                        color: Colors.transparent,
-                      ),
-                      imageUrl:
-                      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png',
-                    ),
+                    child: _pokemonStore.getImageWithSize(numero: num, size: 80),
                     alignment: Alignment.bottomRight,
                   )
                 ],
