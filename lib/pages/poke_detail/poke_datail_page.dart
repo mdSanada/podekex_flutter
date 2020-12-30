@@ -6,12 +6,17 @@ import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class PokeDetailPage extends StatelessWidget {
+class PokeDetailPage extends StatefulWidget {
   final int index;
 
-  Color _corPokemon;
-
   PokeDetailPage({Key key, this.index}) : super(key: key);
+
+  @override
+  _PokeDetailPageState createState() => _PokeDetailPageState();
+}
+
+class _PokeDetailPageState extends State<PokeDetailPage> {
+  Color _corPokemon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +26,10 @@ class PokeDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
-        child: Observer (
+        child: Observer(
           builder: (BuildContext context) {
-            _corPokemon = ConstsAPI.getColorType(type: _pokemonStore.currentPokemon.type.first);
+            _corPokemon = ConstsAPI.getColorType(
+                type: _pokemonStore.currentPokemon.type.first);
             return AppBar(
               title: Opacity(
                 opacity: 0,
@@ -58,7 +64,8 @@ class PokeDetailPage extends StatelessWidget {
         children: <Widget>[
           Observer(
             builder: (context) {
-              _corPokemon = ConstsAPI.getColorType(type: _pokemonStore.currentPokemon.type.first);
+              _corPokemon = ConstsAPI.getColorType(
+                  type: _pokemonStore.currentPokemon.type.first);
               return Container(
                 color: _corPokemon,
               );
