@@ -74,8 +74,23 @@ class _PokeItemState extends State<PokeItem> {
           child: Stack(
             children: <Widget>[
               Align(
-                child: Hero(tag: widget.name,child: _pokemonStore.getImageWithSize(numero: widget.num, size: 80)),
                 alignment: Alignment.bottomRight,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: <Widget>[
+                    Hero(
+                      tag: widget.name + 'rotation',
+                      child: Opacity(
+                        child: Image.asset(
+                          ConstsApp.whitePokeball,
+                          height: 80,
+                          width: 80,
+                        ),
+                        opacity: 0.2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -99,29 +114,24 @@ class _PokeItemState extends State<PokeItem> {
                 ),
               ),
               Align(
+                child: Hero(
+                    tag: widget.name,
+                    child: _pokemonStore.getImageWithSize(
+                        numero: widget.num, size: 80)),
                 alignment: Alignment.bottomRight,
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: <Widget>[
-                    Hero(
-                      tag: widget.name + 'rotation',
-                      child: Opacity(
-                        child: Image.asset(
-                          ConstsApp.whitePokeball,
-                          height: 80,
-                          width: 80,
-                        ),
-                        opacity: 0.2,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),
         ),
         decoration: BoxDecoration(
-          color: ConstsAPI.getColorType(type: widget.types.first),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              ConstsAPI.getColorType(type: widget.types.first).withOpacity(0.7),
+              ConstsAPI.getColorType(type: widget.types.first)
+            ],
+          ),
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),
