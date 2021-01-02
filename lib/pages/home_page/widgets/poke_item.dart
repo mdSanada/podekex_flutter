@@ -128,8 +128,8 @@ class _PokeItemState extends State<PokeItem> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              ConstsAPI.getColorType(type: widget.types.first).withOpacity(0.7),
-              ConstsAPI.getColorType(type: widget.types.first)
+              ConstsApp.getColorType(type: widget.types.first).withOpacity(0.7),
+              ConstsApp.getColorType(type: widget.types.first)
             ],
           ),
           borderRadius: BorderRadius.all(

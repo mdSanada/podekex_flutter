@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:podekex_flutter/consts/consts_api.dart';
+import 'package:podekex_flutter/consts/consts_app.dart';
 import 'package:podekex_flutter/models/pokeapi.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -44,7 +45,7 @@ abstract class _PokeApiStoreBase with Store {
   @action
   setCurrentPokemon({int index}) {
     _currentPokemon = _pokeAPI.pokemon[index];
-    pokemonColor = ConstsAPI.getColorType(type: _currentPokemon.type.first);
+    pokemonColor = ConstsApp.getColorType(type: _currentPokemon.type.first);
     currentPosition = index;
   }
 
