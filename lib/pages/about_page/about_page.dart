@@ -3,6 +3,7 @@ import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:podekex_flutter/models/specie.dart';
 import 'package:podekex_flutter/pages/about_page/widgets/tab_about.dart';
 import 'package:podekex_flutter/pages/about_page/widgets/tab_evolution.dart';
+import 'package:podekex_flutter/pages/about_page/widgets/tab_status.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -89,7 +90,7 @@ class _AboutPageState extends State<AboutPage>
             child: EvolutionTab(),
           ),
           Container(
-            color: Colors.green,
+            child: StatusTab(),
           )
         ],
       ),
