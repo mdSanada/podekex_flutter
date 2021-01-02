@@ -54,7 +54,6 @@ class EvolutionTab extends StatelessWidget {
       pokemon.nextEvolution.forEach(
         (element) {
           _list.add(resizePokemon(Icon(Icons.keyboard_arrow_down)));
-          _pokeApiStore.currentPokemon.nextEvolution.
           _list.add(resizePokemon(_pokeApiStore.getImage(numero: element.num)));
           _list.add(Padding(
             padding: const EdgeInsets.only(top: 8.0),
