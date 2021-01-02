@@ -3,6 +3,7 @@ import 'package:podekex_flutter/consts/consts_app.dart';
 import 'package:podekex_flutter/models/pokeapi.dart';
 import 'package:podekex_flutter/pages/about_page/about_page.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
+import 'package:podekex_flutter/stores/pokeapiv2_store.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +22,7 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
   PageController _pageController;
   Pokemon _pokemon;
   PokeApiStore _pokemonStore;
+  PokeApiV2Store _pokeApiV2Store;
   MultiTrackTween _animation;
   double _progress;
   double _multiplier;
@@ -33,6 +35,10 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
     _pageController =
         PageController(initialPage: widget.index, viewportFraction: 0.4);
     _pokemonStore = GetIt.instance<PokeApiStore>();
+    _pokeApiV2Store = GetIt.instance<PokeApiV2Store>();
+    _pokeApiV2Store.getInfoPokemon(_pokemonStore.currentPokemon.name);
+    _pokeApiV2Store
+        .getInfoSpecie(_pokemonStore.currentPokemon.id.toString());
     _pokemon = _pokemonStore.currentPokemon;
     _animation = MultiTrackTween([
       Track("rotation").add(Duration(seconds: 6), Tween(begin: 0.0, end: 6),
@@ -201,6 +207,9 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
                       controller: _pageController,
                       onPageChanged: (index) {
                         _pokemonStore.setCurrentPokemon(index: index);
+                        _pokeApiV2Store.getInfoPokemon(_pokemonStore.currentPokemon.name);
+                        _pokeApiV2Store
+                            .getInfoSpecie(_pokemonStore.currentPokemon.id.toString());
                       },
                       itemCount: _pokemonStore.pokeAPI.pokemon.length,
                       itemBuilder: (BuildContext context, int index) {

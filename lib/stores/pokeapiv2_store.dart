@@ -20,7 +20,7 @@ abstract class _PokeApiV2StoreBase with Store {
   @action
   Future<void> getInfoPokemon(String name) async {
     try {
-      final response = await http.get(ConstsAPI.pokeapiV2URL);
+      final response = await http.get(ConstsAPI.pokeapiV2URL+name.toLowerCase());
       var decodeJson = jsonDecode(response.body);
       pokeApiV2 = PokeApiV2.fromJson(decodeJson);
     } catch (error, stacktrace) {
@@ -30,9 +30,9 @@ abstract class _PokeApiV2StoreBase with Store {
   }
 
   @action
-  Future<void> getInfoSpecie(String name) async {
+  Future<void> getInfoSpecie(String id) async {
     try {
-      final response = await http.get(ConstsAPI.pokeapiSpeciesV2URL);
+      final response = await http.get(ConstsAPI.pokeapiSpeciesV2URL+id.toLowerCase());
       var decodeJson = jsonDecode(response.body);
       specie = Specie.fromJson(decodeJson);
     } catch (error, stacktrace) {
