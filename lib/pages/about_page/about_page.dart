@@ -6,6 +6,7 @@ import 'package:podekex_flutter/pages/about_page/widgets/tab_evolution.dart';
 import 'package:podekex_flutter/pages/about_page/widgets/tab_status.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mobx/mobx.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:podekex_flutter/stores/pokeapiv2_store.dart';
 
@@ -20,6 +21,7 @@ class _AboutPageState extends State<AboutPage>
   PageController _pageController;
   PokeApiStore _pokemonStore;
   PokeApiV2Store _pokeApiV2Store;
+  ReactionDisposer _disposer;
 
   @override
   void initState() {
@@ -28,11 +30,16 @@ class _AboutPageState extends State<AboutPage>
     _pokemonStore = GetIt.instance<PokeApiStore>();
     _pokeApiV2Store = GetIt.instance<PokeApiV2Store>();
     _pageController = PageController(initialPage: 0);
+    _disposer = reaction(
+        (pokemon) => _pokemonStore.currentPokemon,
+        (result) => _pageController.animateToPage(0,
+            duration: Duration(milliseconds: 300), curve: Curves.easeInOut));
   }
 
   @override
   void dispose() {
     super.dispose();
+    _disposer();
   }
 
   @override
