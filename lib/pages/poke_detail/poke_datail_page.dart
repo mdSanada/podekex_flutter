@@ -239,27 +239,29 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
                                 );
                               },
                             ),
-                            Observer(
-                              builder: (context) {
-                                return AnimatedPadding(
-                                  child: Hero(
-                                    tag: _pokeitem.name,
-                                    child:
-                                        _pokemonStore.getImageWithSizeAnimation(
-                                            numero: _pokeitem.num,
-                                            size: 160,
-                                            index: index,
-                                            current:
-                                                _pokemonStore.currentPosition),
-                                  ),
-                                  duration: Duration(milliseconds: 250),
-                                  curve: Curves.bounceInOut,
-                                  padding: EdgeInsets.all(
-                                      index == _pokemonStore.currentPosition
-                                          ? 0
-                                          : 35),
-                                );
-                              },
+                            IgnorePointer(
+                              child: Observer(
+                                builder: (context) {
+                                  return AnimatedPadding(
+                                    child: Hero(
+                                      tag: _pokeitem.name,
+                                      child:
+                                          _pokemonStore.getImageWithSizeAnimation(
+                                              numero: _pokeitem.num,
+                                              size: 160,
+                                              index: index,
+                                              current:
+                                                  _pokemonStore.currentPosition),
+                                    ),
+                                    duration: Duration(milliseconds: 250),
+                                    curve: Curves.bounceInOut,
+                                    padding: EdgeInsets.all(
+                                        index == _pokemonStore.currentPosition
+                                            ? 0
+                                            : 35),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         );

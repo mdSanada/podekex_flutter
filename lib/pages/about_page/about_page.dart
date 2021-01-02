@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:podekex_flutter/models/specie.dart';
 import 'package:podekex_flutter/pages/about_page/widgets/tab_about.dart';
+import 'package:podekex_flutter/pages/about_page/widgets/tab_evolution.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -41,7 +42,7 @@ class _AboutPageState extends State<AboutPage>
         backgroundColor: Colors.white,
         elevation: 0,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(40),
+          preferredSize: Size.fromHeight(20),
           child: Observer(builder: (context) {
             return TabBar(
               onTap: (index) {
@@ -85,7 +86,7 @@ class _AboutPageState extends State<AboutPage>
             child: AboutTab(),
           ),
           Container(
-            color: Colors.blue,
+            child: EvolutionTab(),
           ),
           Container(
             color: Colors.green,
