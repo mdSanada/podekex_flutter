@@ -3,7 +3,7 @@ import 'package:podekex_flutter/consts/consts_app.dart';
 import 'package:podekex_flutter/models/pokeapi.dart';
 import 'package:podekex_flutter/pages/home_page/widgets/app_bar_home.dart';
 import 'package:podekex_flutter/pages/home_page/widgets/poke_item.dart';
-import 'package:podekex_flutter/pages/poke_detail/poke_datail_page.dart';
+import 'package:podekex_flutter/pages/poke_detail/poke_detail_page.dart';
 import 'package:podekex_flutter/stores/pokeapi_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
